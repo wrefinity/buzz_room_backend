@@ -21,6 +21,10 @@ class UserService {
     deleteUser = async (userId: string): Promise<IUser | null> =>{
         return await User.findByIdAndDelete(userId);
     }
+
+    async findUserByEmail(email: string) {
+        return User.findOne({ email });
+      }
 }
 
 export default  new UserService();

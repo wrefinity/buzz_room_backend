@@ -2,10 +2,13 @@ import cookieParser from 'cookie-parser';
 import express, { Express } from "express";
 import mongoose from "mongoose";
 import session from "express-session";
-import { APP_SECRET, MONGODB_URI, PORT } from "./secrets";
+import { APP_SECRET, MONGODB_DB_URI, MONGODB_URI, PORT } from "./secrets";
 
 import TaskRouter from "./routes/tasks.route";
 import AuthRouter from "./routes/auth.route";
+import passport from 'passport';
+import { MongoClient, ServerApiVersion } from "mongodb";
+import "./configs/googleAuth"
 
 
 
@@ -32,6 +35,30 @@ class Server {
         })
     }
 
+    // Using mogo Atlas, but it's not working with the findOne and Insert command it times out
+    // private connectDB() {
+    //     const client = new MongoClient(MONGODB_DB_URI, {
+    //         serverApi: {
+    //           version: ServerApiVersion.v1,
+    //           strict: true,
+    //           deprecationErrors: true,
+    //         }
+    //       });
+
+    //       async function run() {
+    //         try {
+    //           await client.connect();
+    //           // Send a ping to confirm a successful connection
+    //           await client.db("admin").command({ ping: 1 });
+    //           console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    //         } finally {
+    //           // Ensures that the client will close when you finish/error
+    //           await client.close();
+    //         }
+    //       }
+    //       run().catch(console.dir);
+    // }
+
     private configureMiddlewares() {
         // middlewares here
         this.app.use(express.json()); // for content-body parameters
@@ -42,6 +69,8 @@ class Server {
             saveUninitialized: false
         }));
         this.app.use(cookieParser());
+        this.app.use(passport.initialize());
+        this.app.use(passport.session());
     }
 
     private configureRoutes() {
