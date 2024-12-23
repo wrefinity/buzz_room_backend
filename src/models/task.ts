@@ -9,6 +9,7 @@ export enum SocialPlatform {
 
 export interface ITask extends Document {
     title: string;
+    icon?: string;
     description: string;
     taskType: string;
     url?: string;
@@ -20,6 +21,7 @@ export interface ITask extends Document {
 const TaskSchema = new Schema<ITask>({
     title: { type: String, required: true },
     description: { type: String, required: true },
+    icon: { type: String, required: true },
     url: { type: String },
     socialPlatform: { 
         type: String, 

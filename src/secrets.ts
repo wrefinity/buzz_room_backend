@@ -7,6 +7,8 @@ export const MAIL_HOST = process.env.MAIL_HOST!;
 export const MAIL_USERNAME = process.env.MAIL_USERNAME!;
 export const MAIL_PASSWORD = process.env.MAIL_PASSWORD!;
 export const FROM_EMAIL = process.env.FROM_EMAIL!;
+export const MAIL_PORT = process.env.MAIL_PORT! || 587;
+
 export const APP_SECRET = process.env.APP_SECRET!;
 export const CLOUDINARY_NAME = process.env.CLOUDINARY_NAME!;
 export const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY!;

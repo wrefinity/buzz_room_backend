@@ -6,6 +6,9 @@ import { APP_SECRET, MONGODB_URI, PORT } from "./secrets";
 
 import TaskRouter from "./routes/tasks.route";
 import AuthRouter from "./routes/auth.route";
+import UserRouter from "./routes/users.route";
+import NotificationRouter from "./routes/notification.route";
+import BankRouter from "./routes/bank.route";
 
 
 
@@ -49,6 +52,9 @@ class Server {
         this.app.get("/", (req, res) => res.json({ message: "welcome to buzz room" }));
         this.app.use("/api/task/", TaskRouter);
         this.app.use("/api/auth/", AuthRouter);
+        this.app.use("/api/users/", UserRouter);
+        this.app.use("/api/notifications/", NotificationRouter);
+        this.app.use("/api/bank/", BankRouter);
     }
 
     public start() {
