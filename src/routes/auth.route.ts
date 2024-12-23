@@ -1,5 +1,6 @@
 import AuthRepo from '../controllers/auth';
 import { Router } from "express";
+import passport from 'passport';
 
 class AuthRouter {
     public router: Router;
@@ -15,6 +16,11 @@ class AuthRouter {
         this.router.post('/verify', AuthRepo.verifyaccount);
         this.router.post('/login', AuthRepo.login);
 
+
+        this.router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
+        this.router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
+            res.send('Logged in successfully')
+        })
     }
 }
 

@@ -50,6 +50,10 @@ class UserService {
     deleteUser = async (userId: string): Promise<IUser | null> => {
         return await User.findByIdAndDelete(userId);
     }
+
+    async findUserByEmail(email: string) {
+        return User.findOne({ email });
+      }
     /**
      * Verify user by email and token, then delete the token
      * @param email - The email of the user
